@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "https://campus-navigation-system-yans.onrender.com",
     "paths": {
       "@/*": ["src/*"]
     }
