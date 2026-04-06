@@ -22,7 +22,7 @@ app.use(cors({
   origin: [
     "http://localhost:5173",
     "http://localhost:3000",
-    "https://*.vercel.app"
+    "https://campus-navigation-system-psi.vercel.app"
   ],
   credentials: true
 }));
