@@ -17,7 +17,16 @@ const {
 dotenv.config();
 
 const app = express();
-app.use(cors());
+import cors from "cors";
+
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://*.vercel.app"
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 const PORT = Number(process.env.PORT || 5000);
