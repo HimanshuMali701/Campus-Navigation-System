@@ -113,17 +113,32 @@ const Map = () => {
 
     console.log("PARSED LOCATIONS:", locations);
 
-    const list = locations.map((item) => ({
-      ...item,
-      id: parseBuildingId(item.id),
-      name: normalizeCampusLocationName(item.name, item.id),
-      latitude: Number(item.latitude),
-      longitude: Number(item.longitude),
-    }));
+    const normalized = locations.map((loc) => {
+      const lat = Number(loc.latitude ?? loc.lat);
+      const lng = Number(loc.longitude ?? loc.lng);
 
-    console.log("FINAL LIST:", list);
+      if (lat > 50) {
+        return {
+          ...loc,
+          id: parseBuildingId(loc.id),
+          name: normalizeCampusLocationName(loc.name, loc.id),
+          latitude: lng,
+          longitude: lat,
+        };
+      }
 
-    setAllLocations(list);
+      return {
+        ...loc,
+        id: parseBuildingId(loc.id),
+        name: normalizeCampusLocationName(loc.name, loc.id),
+        latitude: lat,
+        longitude: lng,
+      };
+    });
+
+    console.log("FIXED LOC:", normalized[0]);
+
+    setAllLocations(normalized);
 
     // OPTIONAL (avoid crash)
     // setCampusMap(null);

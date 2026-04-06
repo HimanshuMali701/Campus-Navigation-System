@@ -39,15 +39,21 @@ function getCampusBoundsFromEnv() {
 
 const pool = new Pool(
   process.env.DATABASE_URL
-    ? { connectionString: process.env.DATABASE_URL }
+    ? {
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+          rejectUnauthorized: false
+        }
+      }
     : {
-      host: process.env.PGHOST,
-      port: process.env.PGPORT ? Number(process.env.PGPORT) : 5432,
-      user: process.env.PGUSER,
-      password: process.env.PGPASSWORD,
-      database: process.env.PGDATABASE,
-    }
+        host: process.env.PGHOST,
+        port: process.env.PGPORT ? Number(process.env.PGPORT) : 5432,
+        user: process.env.PGUSER,
+        password: process.env.PGPASSWORD,
+        database: process.env.PGDATABASE,
+      }
 );
+
 
 const hasPgConfig = Boolean(
   process.env.DATABASE_URL ||
@@ -143,11 +149,10 @@ async function fetchLocationsFromPostgres() {
     SELECT
       id,
       name,
-      ST_Y(ST_Centroid(geom)) AS latitude,
-      ST_X(ST_Centroid(geom)) AS longitude
-    FROM ${tableName}
-    WHERE geom IS NOT NULL
-    ORDER BY name ASC
+      ST_Y(geom) AS latitude,
+      ST_X(geom) AS longitude
+    FROM buildings
+    ORDER BY name;
   `;
 
   const result = await pool.query(sql);

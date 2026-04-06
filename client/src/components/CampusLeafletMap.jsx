@@ -112,14 +112,18 @@ function MapViewController({ selectedLatLng, bounds, locationsWithGps }) {
   return null;
 }
 
-function FitBounds({ route }) {
+function FitBounds({ locations }) {
   const map = useMap();
 
   useEffect(() => {
-    if (route && route.length > 0) {
-      map.fitBounds(route);
+    if (locations && locations.length > 0) {
+      const bounds = locations.map(loc => [
+        Number(loc.latitude),
+        Number(loc.longitude)
+      ]);
+      map.fitBounds(bounds, { padding: [50, 50], maxZoom: 18 });
     }
-  }, [route, map]);
+  }, [locations, map]);
 
   return null;
 }
@@ -216,8 +220,8 @@ export default function CampusLeafletMap({
       className={`relative overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-100 shadow-sm ring-1 ring-slate-900/5 ${heightClass} ${className}`}
     >
       <MapContainer
-        center={defaultCenter}
-        zoom={initialZoom}
+        center={defaultCenter || [21.133, 72.717]}
+        zoom={initialZoom || 15}
         className="z-0 h-full w-full"
         scrollWheelZoom
         zoomControl
@@ -241,7 +245,7 @@ export default function CampusLeafletMap({
           bounds={bounds}
           locationsWithGps={withGps}
         />
-        <FitBounds route={normalizedRouteLatLng} />
+        <FitBounds locations={withGps} />
 
         {withGps.map((loc) => {
           const em = isEmergencyLoc(loc);
@@ -250,10 +254,15 @@ export default function CampusLeafletMap({
             : categoryColors[loc.category] || categoryColors.other;
           const active = loc.id === selectedId;
           const icon = makePinIcon(baseColor, active, em);
+          const lat = Number(loc.latitude);
+          const lng = Number(loc.longitude);
+
+          console.log("MARKER:", loc.name, lat, lng);
+
           return (
             <Marker
               key={loc.id}
-              position={[loc.latitude, loc.longitude]}
+              position={[lat, lng]}
               icon={icon}
               eventHandlers={{
                 click: () => onSelectLocation?.(loc),
