@@ -558,8 +558,8 @@ async function buildRouteFromBuildings(startBuildingId, endBuildingId) {
       SELECT 
         id,
         name,
-        ST_X(ST_Centroid(geom)) AS latitude,
-        ST_Y(ST_Centroid(geom)) AS longitude
+        ST_Y(ST_Centroid(geom)) AS latitude,
+        ST_X(ST_Centroid(geom)) AS longitude
       FROM buildings
     `);
 
