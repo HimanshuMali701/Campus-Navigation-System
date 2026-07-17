@@ -390,11 +390,11 @@ const calculateRoute = useCallback(async (nextRouteToId = null, nextRouteFromId 
           </p>
           <div className="space-y-1 text-sm text-slate-600">
             <p>
-              <span className="font-medium text-slate-800">Where: </span>
+              <span className="font-medium text-slate-800">Working Days: Mon to Sat </span>
               {selectedLocation.address}
             </p>
             <p>
-              <span className="font-medium text-slate-800">Hours: </span>
+              <span className="font-medium text-slate-800">Working Hours: 9 to 5</span>
               {selectedLocation.hours}
             </p>
             {selectedLocation.phone && (
@@ -518,7 +518,7 @@ const calculateRoute = useCallback(async (nextRouteToId = null, nextRouteFromId 
           </div>
 
           <div className="hidden min-w-0 flex-col gap-4 lg:flex">
-            <Card className="border-slate-200/80 shadow-md ring-1 ring-slate-900/5">
+           {/* <Card className="border-slate-200/80 shadow-md ring-1 ring-slate-900/5">
               <CardHeader className="pb-2">
                 <CardTitle className="flex items-center gap-2 text-base">
                   <CalendarClock className="h-4 w-4 text-blue-600" />
@@ -587,7 +587,7 @@ const calculateRoute = useCallback(async (nextRouteToId = null, nextRouteFromId 
                   {nearestEmergency ? "Show on map" : "Use my location"}
                 </Button>
               </CardContent>
-            </Card>
+            </Card>*/}
 
             <Card className="border-slate-200/80 shadow-md ring-1 ring-slate-900/5">
               <CardHeader className="pb-2">

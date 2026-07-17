@@ -38,10 +38,10 @@ const Home = () => {
   ];
 
   const quickLinks = [
-    { name: 'Libraries', category: 'library', color: 'bg-purple-100 text-purple-800' },
-    { name: 'Dining', category: 'cafeteria', color: 'bg-orange-100 text-orange-800' },
-    { name: 'Parking', category: 'parking', color: 'bg-green-100 text-green-800' },
-    { name: 'Labs', category: 'lab', color: 'bg-blue-100 text-blue-800' },
+    { name: 'Canteen', category: 'library', color: 'bg-purple-100 text-purple-800' },
+    { name: 'Administration', category: 'cafeteria', color: 'bg-orange-100 text-orange-800' },
+    { name: 'Hostels', category: 'parking', color: 'bg-green-100 text-green-800' },
+    { name: 'Faculty', category: 'lab', color: 'bg-blue-100 text-blue-800' },
   ];
 
   return (
@@ -64,10 +64,12 @@ const Home = () => {
                 Explore Campus Map
               </Button>
             </Link>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto">
-              <Search className="mr-2 h-5 w-5" />
-              Search Locations
-            </Button>
+            <Link to="/map">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                <Search className="mr-2 h-5 w-5" />
+                Search Locations
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -80,7 +82,7 @@ const Home = () => {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {quickLinks.map((link) => (
-              <Link key={link.category} to={`/map?category=${link.category}`}>
+              <Link to="/map">
                 <Card className="hover:shadow-lg transition-shadow cursor-pointer">
                   <CardContent className="p-6 text-center">
                     <div className={`inline-flex px-3 py-1 rounded-full text-sm font-medium ${link.color} mb-2`}>
