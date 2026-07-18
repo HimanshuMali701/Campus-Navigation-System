@@ -34,10 +34,16 @@ A comprehensive web-based navigation system designed to help students and visito
 
 ## Technologies Used
 
-- **Frontend**: HTML, CSS, JavaScript
+- **Frontend**: HTML, CSS, JavaScript, ReactJS
 - **Backend**: Node.js, Express
-- **Database**: MongoDB
+- **Database**: Postgresql
 - **Mapping**: Leaflet.js / Google Maps API
+
+## Deployment Used
+
+- **Frontend** : Vercel
+- **Backend** : Render
+- **Database** : Supabase
 
 ## Project Structure
 
